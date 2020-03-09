@@ -1,5 +1,7 @@
 import pandas as pd
 configfile: "configs/config_main.yaml"
+localrules: getReads, summaryReport
+
 
 key = config["KEY"]
 input_path = config["READSPATH"]
@@ -57,7 +59,7 @@ else:
             input_path = input_path
         run:
             shell("scp -i {params.key} {params.input_path}/{wildcards.sample}*.f*q.gz {output.read}")
-            
+
     rule qualityControl:
         input:
             read = intermediate_path + "/reads/{sample}.fastq.gz"

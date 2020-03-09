@@ -1,5 +1,7 @@
 import pandas as pd
 configfile: "../configs/config_align_count.yaml"
+localrules: getReads, formatCount, mergeTransGene, sortIndex, featureCount
+
 
 samples = pd.read_table(config["METAFILE"], header = 0)['sample']
 indexes = list(range(1, 9))

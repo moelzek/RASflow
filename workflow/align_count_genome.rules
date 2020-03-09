@@ -1,5 +1,7 @@
 import pandas as pd
 configfile: "configs/config_main.yaml"
+localrules: getReads, summaryReport, alignmentQC
+
 
 samples = pd.read_csv(config["METAFILE"], sep = '\t', header = 0)['sample']
 trimmed = config["TRIMMED"]

@@ -3,6 +3,8 @@ import numpy as np
 
 configfile: "configs/config_main.yaml"
 
+
+
 input_path = config["FINALOUTPUT"] + "/" + config["PROJECT"] + "/genome/countFile"
 output_path = config["FINALOUTPUT"] + "/" + config["PROJECT"] + "/genome/dea"
 samples = np.array(pd.read_table(config["METAFILE"], header = 0)['sample'])

@@ -1,5 +1,7 @@
 import pandas as pd
 configfile: "configs/config_main.yaml"
+localrules: getReads, summaryReport
+
 
 key = config["KEY"]
 input_path = config["READSPATH"]
