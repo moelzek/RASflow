@@ -1,0 +1,49 @@
+
+
+{
+    "__default__":
+    {
+        "account": "LILLEY-SL3-CPU",
+        "mem"    : 20000,
+        "queue"     : "medium_priority",
+        "nCPUs"     : "16",
+        "resources" : "\"select[mem>20000] rusage[mem=20000] span[hosts=1]\"",
+        "time": "1:0:0",
+        "thread":  4,
+        "name"      : "JOBNAME.{rule}.{wildcards}",
+        "output"    : "/logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "/logs/cluster/{rule}.{wildcards}.err"
+    },
+
+    "indexTrans":
+    {
+        "time": "2:0:0",
+        "mem"    : 30000,
+        "thread" : 12,
+        "resources" : "\"select[mem>30000] rusage[mem=30000] span[hosts=1]\""
+    },
+
+    "quantify":
+    {
+        "time": "2:0:0",
+        "mem"    : 30000,
+        "thread" : 12,
+        "resources" : "\"select[mem>20000] rusage[mem=20000] span[hosts=1]\""
+    },
+
+    "alignment":
+    {
+        "time": "0:30:0",
+        "mem"    : 30000,
+        "thread" : 8,
+        "resources" : "\"select[mem>30000] rusage[mem=30000] span[hosts=1]\""
+    },
+
+    "indexGenome":
+    {
+        "time": "2:0:0",
+        "mem"    : 30000,
+        "thread" : 12,
+        "resources" : "\"select[mem>30000] rusage[mem=30000] span[hosts=1]\""
+    }
+}
