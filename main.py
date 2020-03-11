@@ -84,7 +84,7 @@ else:
 
     if reference == "transcriptome":
         start_time = time.time()
-        os.system("nice -5 snakemake -j 100 --cluster-config ./workflow/cluster.json --cluster 'sbatch -A {cluster.account} -t {cluster.time} --mem={cluster.mem} -n {cluster.thread} -p skylake' -s workflow/quantify_trans_groubed.rules 2>&1 | tee logs/log_quantify_trans.txt")
+        os.system("nice -5 snakemake -j 100 --cluster-config ./workflow/cluster.json --cluster 'sbatch -A {cluster.account} -t {cluster.time} --mem={cluster.mem} -n {cluster.thread} -p skylake' -s workflow/quantify_trans.rules 2>&1 | tee logs/log_quantify_trans.txt")
         end_time = time.time()
         file_log_time.write("Time of running transcripts quantification:" + spend_time(start_time, end_time) + "\n")
     elif reference == "genome":

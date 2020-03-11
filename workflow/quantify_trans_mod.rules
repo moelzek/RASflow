@@ -3,7 +3,7 @@ configfile: "configs/config_main.yaml"
 localrules: getReads, summaryReport
 
 
-samples = pd.read_csv(config["METAFILE"], sep = '\t', header = 0)['group']
+samples = pd.read_csv(config["METAFILE"], sep = '\t', header = 0)['sample']
 trimmed = config["TRIMMED"]
 if trimmed:
     input_path = config["OUTPUTPATH"] + "/trim"
@@ -33,12 +33,26 @@ if end == "pair":
 else:
     rule getReads:
         output:
-            read = temp(intermediate_path + "/reads/{sample}.fastq.gz")
+            TCL = temp(intermediate_path + "/reads/{sample}TCL.fastq.gz")
+            P100 = temp(intermediate_path + "/reads/{sample}P100.fastq.gz")
+            P500 = temp(intermediate_path + "/reads/{sample}P500.fastq.gz")
+            P2000= temp(intermediate_path + "/reads/{sample}P2000.fastq.gz")
+            P5000 = temp(intermediate_path + "/reads/{sample}P5000.fastq.gz")
+            SN = temp(intermediate_path + "/reads/{sample}SN.fastq.gz")
+            SN_2 = temp(intermediate_path + "/reads/{sample}SN_2.fastq.gz")
+            SN_3 = temp(intermediate_path + "/reads/{sample}SN_3.fastq.gz")
         params:
             key = key,
             input_path = input_path
         run:
-            shell("scp -i {params.key} {params.input_path}/{wildcards.sample}*.f*q.gz {output.read}")
+            shell("cat {params.input_path}/{wildcards.sample}TCL*.f*q.gz > {output.TCL}")
+            shell("cat {params.input_path}/{wildcards.sample}P100*.f*q.gz > {output.P100}")
+            shell("cat {params.input_path}/{wildcards.sample}P500*.f*q.gz > {output.P500}")
+            shell("cat {params.input_path}/{wildcards.sample}P2000*.f*q.gz > {output.P2000}")
+            shell("cat {params.input_path}/{wildcards.sample}P5000*.f*q.gz > {output.P5000}")
+            shell("cat {params.input_path}/{wildcards.sample}SN*.f*q.gz > {output.SN}")
+            shell("cat {params.input_path}/{wildcards.sample}SN-2*.f*q.gz > {output.SN_2}")
+            shell("cat {params.input_path}/{wildcards.sample}SN-3*.f*q.gz > {output.SN_3}")
 
 rule indexTrans:
     input:

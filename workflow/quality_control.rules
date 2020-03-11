@@ -2,7 +2,6 @@ import pandas as pd
 configfile: "configs/config_main.yaml"
 localrules: getReads, summaryReport
 
-
 key = config["KEY"]
 input_path = config["READSPATH"]
 samples = pd.read_csv(config["METAFILE"], sep = '\t', header = 0)['sample']
@@ -58,8 +57,7 @@ else:
             key = key,
             input_path = input_path
         run:
-            shell("scp -i {params.key} {params.input_path}/{wildcards.sample}*.f*q.gz {output.read}")
-
+            shell("scp -i {params.key} {params.input_path}/{wildcards.sample}*.f*q.gz {output.read}")         
     rule qualityControl:
         input:
             read = intermediate_path + "/reads/{sample}.fastq.gz"
@@ -79,4 +77,3 @@ else:
             path = final_path + "/fastqc"
         shell:
             "multiqc {params.path} --filename {output.report}"
-    
